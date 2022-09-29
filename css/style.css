@@ -298,7 +298,7 @@ nav ul li{
     margin-top: 45px;
 }
 
-.boton input[type="submit"]{
+.boton input[type="button"]{
     border: none;
     border-radius: 12px;
     width: 130px;
@@ -310,7 +310,7 @@ nav ul li{
     transition: box-shadow 200ms;
 }
 
-.boton input[type="submit"]:hover{
+.boton input[type="button"]:hover{
     box-shadow: 1px 1px 30px -5px #202020ce;
 }
 
