@@ -6,19 +6,14 @@ function listenerBoton(){
 
 function metodoRaices(){
 
-    alert("Has dado click")
-
-    let errorDeseado = Number(document.querySelector(".inputErr")); //Error deseado por el usuario
+    let errorDeseado = document.querySelector("#inputErr").value; //Error deseado por el usuario
     let errorActual = 100.0; // Error actual de 100%
-    let Xo = Number(document.querySelector(".inputXo")); //Punto inicial //2
+    let Xo = document.querySelector("#inputXo").value; //Punto inicial //2
     let i = 1; //Iteraciones
 
-    alert("Antes del ciclo")
 
     //Ciclo iterativo
     while (errorActual > errorDeseado) {
-
-        alert("entra al ciclo")
 
         console.log("Iteracion: ", i);
         defFun(Xo);
@@ -27,9 +22,12 @@ function metodoRaices(){
 
         let Xi = SigXi(Xo); //1,6
         if(i != 1){
-            Error(Xi, Xo);
+            errorActual = Error(Xi, Xo);
         }
-
+        alert("Raiz siguiente: "+Xi +"\nError actual: "+errorActual);
+        if(errorActual < errorDeseado){
+            break;
+        }
         Xo = Xi; //Xo = 1,6
         i++;
     }
@@ -39,17 +37,17 @@ function metodoRaices(){
     // f(x) = (x-3)(x-1)^2
     // f(x) = x^3 - 5x^2 + 7x - 3
     function defFun(Xo){
-        return Math.pow(Xi,3) - 5 * Math.pow(Xi,2) + 7*Xi -3;
+        return Math.pow(Xo,3) - 5 * Math.pow(Xo,2) + 7*Xo -3;
     }
 
     // f'(x) = 3x^2 - 10x + 7
     function dxFun(Xo) {
-        return 3 * Math.pow(Xi,2) - 10 * Xi + 7;
+        return 3 * Math.pow(Xo,2) - 10 * Xo + 7;
     }
 
     //f''(x) = 6x - 10
     function dx2Fun(Xo) {
-        return 6 * Xi - 10;
+        return 6 * Xo - 10;
     }
 
     //Calcular la siguiente raiz
