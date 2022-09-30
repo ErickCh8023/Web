@@ -6,9 +6,9 @@ function listenerBoton(){
 
 function metodoRaices(){
 
-    let errorDeseado = document.querySelector("#inputErr").value; //Error deseado por el usuario
+    let errorDeseado = document.querySelector(".inputErr").value; //Error deseado por el usuario
     let errorActual = 100.0; // Error actual de 100%
-    let Xo = document.querySelector("#inputXo").value; //Punto inicial //2
+    let Xo = document.querySelector(".inputXo").value; //Punto inicial //2
     let i = 1; //Iteraciones
 
 
@@ -28,8 +28,30 @@ function metodoRaices(){
         if(errorActual < errorDeseado){
             break;
         }
+        crearTabla(i, Xo, defFun(Xo), dxFun(Xo), dx2Fun(Xo), SigXi(Xo), errorActual);
         Xo = Xi; //Xo = 1,6
         i++;
+    }
+
+    //Crear la tabla
+    function crearTabla(i, Xo, defFun, dxFun, dx2Fun, xi, error){
+
+        let columnas = [i, Xo, defFun, dxFun, dx2Fun, xi, error];
+        let contador = 1;
+        for(let j = 0; j < i; j++){
+            let filaActual = document.querySelector("#tabla").insertRow(i);
+
+            for(let k = 0; k < 7; k++){
+                if(k == 0){
+                    let celda = filaActual.insertCell(k);
+                    celda.innerHTML = contador;
+                    contador++;
+                }else{
+                    let celda = filaActual.insertCell(k);
+                    celda.innerHTML = columnas[k];
+                }
+            }
+        }
     }
 
     //Evaluar la funcion y sus derivadas
@@ -64,7 +86,34 @@ function metodoRaices(){
         return Math.abs(((Xi - Xo) / Xi) * 100);
     }
 
-    
+
+    /*function mandarTabla(i, Xo, defFun, dxFun, dx2Fun, xi, error){
+        let tabla = document.querySelector("#tabla");
+        let tr = document.createElement('tr');
+        let array = [i, Xo, defFun, dxFun, dx2Fun, xi, error];
+
+        for(let j = 0; j < 7; i++){
+            //Creación de etiquetas
+            let td = document.createElement('td');
+            //Creación de texto
+            td.appendChild(document.createTextNode(array[j]));
+            tr.appendChild(td);
+        }
+
+    }
+
+    function mandarT(){
+        document.querySelector(".divTabla").innerHTML(
+        "<table>"
+        ,"<th>Iteración</th>",
+        "<th>Xo</th>",
+        "<th>F(Xo)</th>",
+        "<th>F'(Xo)</th>",
+        "<th>F''(Xo)</th>",
+        "<th>X<sub>o+1</sub></th>",
+        "<th>Error (%)</th>",
+        "</table>");
+    }*/
 }
 
 window.onload = listenerBoton;
