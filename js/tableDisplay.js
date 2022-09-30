@@ -10,47 +10,37 @@ function metodoRaices(){
     let errorActual = 100.0; // Error actual de 100%
     let Xo = document.querySelector(".inputXo").value; //Punto inicial //2
     let i = 1; //Iteraciones
-
+    let bandera = false;
 
     //Ciclo iterativo
-    while (errorActual > errorDeseado) {
+    while (errorActual >= errorDeseado) {
 
         console.log("Iteracion: ", i);
-        defFun(Xo);
-        dxFun(Xo);
-        dx2Fun(Xo);
 
         let Xi = SigXi(Xo); //1,6
         if(i != 1){
             errorActual = Error(Xi, Xo);
         }
-        alert("Raiz siguiente: "+Xi +"\nError actual: "+errorActual);
-        if(errorActual < errorDeseado){
-            break;
-        }
-        crearTabla(i, Xo, defFun(Xo), dxFun(Xo), dx2Fun(Xo), SigXi(Xo), errorActual);
+        console.log("Xi = "+Xi+" | Error: "+errorActual);
+        alert("Iteración: "+i+"\nRaiz siguiente: "+Xi +"\nError actual: "+errorActual);
+        crearTabla(i, Xo, defFun(Xo), dxFun(Xo), dx2Fun(Xo), SigXi(Xo), errorActual, errorDeseado);
         Xo = Xi; //Xo = 1,6
         i++;
+        
     }
 
     //Crear la tabla
-    function crearTabla(i, Xo, defFun, dxFun, dx2Fun, xi, error){
+    function crearTabla(i, Xo, defFun, dxFun, dx2Fun, xi, error, errorDeseado){
 
         let columnas = [i, Xo, defFun, dxFun, dx2Fun, xi, error];
-        let contador = 1;
-        for(let j = 0; j < i; j++){
-            let filaActual = document.querySelector("#tabla").insertRow(i);
+        let filaActual = document.querySelector('#tabla').insertRow(i);
 
-            for(let k = 0; k < 7; k++){
-                if(k == 0){
-                    let celda = filaActual.insertCell(k);
-                    celda.innerHTML = contador;
-                    contador++;
-                }else{
-                    let celda = filaActual.insertCell(k);
-                    celda.innerHTML = columnas[k];
-                }
-            }
+        console.log("i antes del for: "+i);
+        for(let k = 0; k < 7; k++){
+            let celda = filaActual.insertCell(k);
+            celda.innerHTML = columnas[k];
+            console.log("i dentro del for: "+i+"\nk del ciclo: "+k);
+            console.log("array valor: "+columnas[k]);
         }
     }
 
